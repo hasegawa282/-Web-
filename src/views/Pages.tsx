@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Router, Route, Redirect, Switch } from "react-router-dom";
 
-import Home from "./templates/Home";
+import Home from "./pages/Home";
 import history from "../utils/history";
 
 const Pages: React.FC = props => {
