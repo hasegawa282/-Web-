@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Maps from "../Maps";
 
 const Keijiban:React.FC =props=> {
-  var list:string[]=[];
+  // var list:string[]=[];        <- 変数だけ変えてもレンダリングされないよ！めっっ！
   const [value,setValue]=useState(<></>)
   const [textName, setName]=useState("");
+  const [list, setList] = useState<string[]>([])
 
 
 
@@ -14,17 +15,18 @@ const Keijiban:React.FC =props=> {
     setName(newtextName);
   };
 
-  const resultMap=()=>{
-    if(list.length===1){
-      return(<Maps text={list[0]}/>);
-    }else{list.map((item)=>{
-        return(<Maps text={item} />);
-      })
-    }
-  };
+  // const resultMap=()=>{
+  //   if(list.length===1){
+  //     return(<Maps text={list[0]}/>);
+  //   }else{list.map((item)=>{
+  //       return(<Maps text={item} />);
+  //     })
+  //   }
+  // };
 
   const submitText=()=>{
-    list.push(textName)
+    // list.push(textName)
+    setList([...list, textName])    // <- ...list はlistの中身全部を意味する
   }
 
   return(
@@ -39,7 +41,12 @@ const Keijiban:React.FC =props=> {
       　</form>
       </BorderLine>
       <div>
-        {resultMap()}
+        {/* resultMap()    ↓<Maps ~~ />を中括弧でくくるとエラーになる / map使うときはユニークなkeyを設定しないといけない*/}
+        {
+          list.map((content, index) => 
+            <Maps text={content} key={index}/>
+          )
+        }
       </div>
     </Asd>
   )
