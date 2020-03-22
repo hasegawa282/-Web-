@@ -1,21 +1,30 @@
 import React,{ useState } from "react";
 import styled from "styled-components";
+import Maps from "../Maps";
 
-
-const Keijiban: React.FC = props => {
-  const [value, setValue]=useState("aiueo");
+const Keijiban:React.FC =props=> {
+  var list:string[]=[];
+  const [value,setValue]=useState(<></>)
   const [textName, setName]=useState("");
+
+
 
   const textChange=(e:any)=>{
     const newtextName=e.target.value;
-    console.log(newtextName)
     setName(newtextName);
   };
 
+  const resultMap=()=>{
+    if(list.length===1){
+      return(<Maps text={list[0]}/>);
+    }else{list.map((item)=>{
+        return(<Maps text={item} />);
+      })
+    }
+  };
+
   const submitText=()=>{
-    const newValue=textName;
-    console.log(textName);
-    setValue(newValue);
+    list.push(textName)
   }
 
   return(
@@ -27,11 +36,11 @@ const Keijiban: React.FC = props => {
           <textarea  cols={80} rows={7} onChange={textChange}></textarea>
           <br />
           <input type="button" value="投稿" onClick={submitText}></input>
-      </form>
+      　</form>
       </BorderLine>
-        <div>
-          {value}
-        </div>
+      <div>
+        {resultMap()}
+      </div>
     </Asd>
   )
 }
