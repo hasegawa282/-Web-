@@ -3,9 +3,15 @@ import styled from "styled-components";
 import Maps from "../Maps";
 
 const Keijiban:React.FC =props=> {
+
   const [list,setList]=useState<string[]>([]);
-  const [textName, setName]=useState("");
+
 　const a:string="master";
+
+  const [value,setValue]=useState(<></>)
+  const [textName, setName]=useState("");
+
+
 
 
   const textChange=(e:any)=>{
@@ -13,15 +19,15 @@ const Keijiban:React.FC =props=> {
     setName(newtextName);
   };
 
-
-  const submitText=()=>{
-    setList([...list,textName]);
-  }
-
   const selectChange=(x:number)=>{
     const a:string[]=list;
     a.splice(x,1);
     setList(a)
+  }
+
+  const submitText=()=>{
+    setList([...list, textName])  
+
   }
 
   return(
