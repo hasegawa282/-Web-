@@ -3,10 +3,9 @@ import styled from "styled-components";
 import Maps from "../Maps";
 
 const Keijiban:React.FC =props=> {
-  var list:string[]=[];
-  const [value,setValue]=useState(<></>)
+  const [list,setList]=useState<string[]>([]);
   const [textName, setName]=useState("");
-
+　const a:string="master";
 
 
   const textChange=(e:any)=>{
@@ -14,22 +13,20 @@ const Keijiban:React.FC =props=> {
     setName(newtextName);
   };
 
-  const resultMap=()=>{
-    if(list.length===1){
-      return(<Maps text={list[0]}/>);
-    }else{list.map((item)=>{
-        return(<Maps text={item} />);
-      })
-    }
-  };
 
   const submitText=()=>{
-    list.push(textName)
+    setList([...list,textName]);
+  }
+
+  const selectChange=(x:number)=>{
+    const a:string[]=list;
+    a.splice(x,1);
+    setList(a)
   }
 
   return(
     <Asd>
-      <div>ユーザー名:<></></div>
+      <div>ユーザー名:{a}</div>
       <br />
       <BorderLine>
         <form>
@@ -39,7 +36,11 @@ const Keijiban:React.FC =props=> {
       　</form>
       </BorderLine>
       <div>
-        {resultMap()}
+        {list.map((content,index)=>
+          <>
+          <Maps text={content} key={index} myFunc={()=>selectChange(index)}/>
+          </>
+        )}
       </div>
     </Asd>
   )
