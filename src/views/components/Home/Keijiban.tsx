@@ -5,8 +5,8 @@ import Maps from "../Maps";
 const Keijiban:React.FC =props=> {
 
   const [list,setList]=useState<string[]>([]);
-
-　const a:string="master";
+  
+  const a:string="master";
 
   const [value,setValue]=useState(<></>)
   const [textName, setName]=useState("");
@@ -29,7 +29,7 @@ const Keijiban:React.FC =props=> {
   }
 
   const submitText=()=>{
-    setList([...list, textName])  
+    setList([...list, textName])
   }
 
   return(
