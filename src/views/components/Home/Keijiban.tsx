@@ -19,7 +19,7 @@ const Keijiban:React.FC =props=> {
     setName(newtextName);
   };
 
-  const selectChange=(x:number)=>{
+  const deleteChange=(x:number)=>{
     const a:string[]=list;
     a.splice(x,1);
     setList(a)
@@ -44,7 +44,7 @@ const Keijiban:React.FC =props=> {
       <div>
         {list.map((content,index)=>
           <>
-          <Maps text={content} key={index} myFunc={()=>selectChange(index)}/>
+          <Maps text={content} key={index} myFunc={()=>deleteChange(index)}/>
           </>
         )}
       </div>
