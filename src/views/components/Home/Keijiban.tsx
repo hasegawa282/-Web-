@@ -5,14 +5,11 @@ import Maps from "../Maps";
 const Keijiban:React.FC =props=> {
 
   const [list,setList]=useState<string[]>([]);
-
-　const a:string="master";
+  
+  const a:string="master";
 
   const [value,setValue]=useState(<></>)
   const [textName, setName]=useState("");
-
-
-
 
   const textChange=(e:any)=>{
     const newtextName=e.target.value;
@@ -20,14 +17,19 @@ const Keijiban:React.FC =props=> {
   };
 
   const deleteChange=(x:number)=>{
-    const a:string[]=list;
+    // 配列は普通にイコールで渡すと'参照渡し'になる(一方を変更するともう一方も変更される状態)
+    // 今回はこの参照渡しのせいで、aとlistが内部的に同じ変数になってしまい、setList(a)がsetList(list)
+    // と認識されてしまったため、reactが'なんや、変更ないやんレンダリングやめよ'となってしまった
+    // 配列.slice()とすることで、配列の中身をそっくりコピー出来る('値渡し')ので、今回はこのように解決した
+    
+    let a:string[]=list.slice();
     a.splice(x,1);
+    console.log(a)
     setList(a)
   }
 
   const submitText=()=>{
-    setList([...list, textName])  
-
+    setList([...list, textName])
   }
 
   return(
@@ -43,9 +45,7 @@ const Keijiban:React.FC =props=> {
       </BorderLine>
       <div>
         {list.map((content,index)=>
-          <>
           <Maps text={content} key={index} myFunc={()=>deleteChange(index)}/>
-          </>
         )}
       </div>
     </Asd>
